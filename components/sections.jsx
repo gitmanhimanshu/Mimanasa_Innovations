@@ -5,12 +5,14 @@ import { motion } from "framer-motion";
 import {
   ArrowRight, PlayCircle, CheckCircle2, Quote, ChevronLeft, ChevronRight,
   Sparkles, Building2, Users, Globe, Mail, Phone, MapPin, Send,
+  ShieldCheck, Lock, ServerCog, Plus, Minus,
 } from "lucide-react";
 
 import { Reveal, Counter, SectionHeading } from "./ui";
 import {
   HERO_CARDS, TRUST_STATS, PRODUCTS, SOLUTIONS, WHY, TECH, ACHIEVEMENTS,
   CASE_STUDIES, TESTIMONIALS, ROADMAP, CAREERS, CONTACT_EMAIL, OFFICE, TAGLINE,
+  FAQS, VALUE_PROPS,
 } from "@/lib/site";
 
 /* shared decorative blobs */
@@ -126,6 +128,95 @@ export function Trust() {
               <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{s.label}</p>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================== VALUE PROPS / TRUST BAND ============================== */
+export function ValueProps() {
+  return (
+    <section className="py-12">
+      <div className="container-x">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {VALUE_PROPS.map((v, i) => (
+            <Reveal key={v.label} delay={i * 0.07}>
+              <div className="rounded-2xl glass p-6 text-center">
+                <p className="text-3xl font-extrabold gradient-text">{v.stat}</p>
+                <p className="mt-1 font-semibold text-slate-900 dark:text-white">{v.label}</p>
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{v.sub}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================== SECURITY BAND ============================== */
+export function Security() {
+  const items = [
+    { icon: ShieldCheck, title: "Enterprise-grade security", desc: "Role-based access control on every action." },
+    { icon: Lock, title: "Private by design", desc: "Complete multi-tenant data isolation — your data is yours." },
+    { icon: ServerCog, title: "Reliable cloud", desc: "Managed, encrypted infrastructure with high availability." },
+  ];
+  return (
+    <section className="py-12">
+      <div className="container-x">
+        <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8 dark:border-white/10 dark:from-white/[0.04] dark:to-transparent sm:p-12">
+          <div className="grid gap-8 md:grid-cols-3">
+            {items.map((it, i) => (
+              <Reveal key={it.title} delay={i * 0.08} className="flex items-start gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 text-white">
+                  <it.icon className="h-6 w-6" />
+                </span>
+                <div>
+                  <h3 className="font-bold text-slate-900 dark:text-white">{it.title}</h3>
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{it.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================== FAQ ============================== */
+export function FAQ() {
+  const [open, setOpen] = useState(0);
+  return (
+    <section id="faq" className="py-24">
+      <div className="container-x">
+        <SectionHeading eyebrow="FAQ" title="Questions, answered" subtitle="Everything you need to know before getting started." />
+        <div className="mx-auto mt-12 max-w-3xl space-y-3">
+          {FAQS.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <Reveal key={f.q} delay={i * 0.04}>
+                <div className="overflow-hidden rounded-2xl glass">
+                  <button
+                    onClick={() => setOpen(isOpen ? -1 : i)}
+                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-semibold text-slate-900 dark:text-white">{f.q}</span>
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600 dark:bg-brand-400/10 dark:text-brand-300">
+                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} transition={{ duration: 0.3 }}>
+                      <p className="px-6 pb-5 text-slate-600 dark:text-slate-400">{f.a}</p>
+                    </motion.div>
+                  )}
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
