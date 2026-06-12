@@ -1,4 +1,4 @@
-import { FAQS, LINKEDIN, OFFICE } from "@/lib/site";
+import { FAQS, LINKEDIN, OFFICE, PRODUCTS } from "@/lib/site";
 
 const SITE = "https://launch.mimanasa.online";
 
@@ -33,6 +33,23 @@ export function JsonLd() {
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Mimanasa Innovations Products",
+      itemListElement: PRODUCTS.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "SoftwareApplication",
+          name: p.name,
+          description: p.tagline,
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web, Android",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+        },
       })),
     },
   ];

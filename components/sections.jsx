@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { Reveal, Counter, SectionHeading } from "./ui";
+import Tilt3D from "./Tilt3D";
 import {
   HERO_CARDS, TRUST_STATS, PRODUCTS, SOLUTIONS, WHY, TECH, ACHIEVEMENTS,
   CASE_STUDIES, TESTIMONIALS, ROADMAP, CAREERS, CONTACT_EMAIL, OFFICE, TAGLINE,
@@ -27,11 +28,30 @@ function Blobs() {
 }
 
 /* ============================== HERO ============================== */
+const PARTICLES = [
+  { left: "8%", top: "22%", size: 10, delay: "0s" },
+  { left: "16%", top: "64%", size: 7, delay: "1.4s" },
+  { left: "30%", top: "30%", size: 6, delay: "2.6s" },
+  { left: "46%", top: "14%", size: 9, delay: "0.8s" },
+  { left: "58%", top: "70%", size: 7, delay: "2s" },
+  { left: "72%", top: "24%", size: 10, delay: "3.2s" },
+  { left: "84%", top: "56%", size: 6, delay: "1s" },
+  { left: "92%", top: "32%", size: 8, delay: "2.4s" },
+];
+
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-32 pb-20 sm:pt-40">
+    <section id="top" className="relative overflow-hidden pt-32 pb-24 sm:pt-40">
       <Blobs />
       <div className="absolute inset-0 -z-10 bg-grid-light bg-[size:40px_40px] opacity-60 dark:bg-grid-dark" />
+      {/* 3D perspective floor + floating particles */}
+      <div className="grid-floor -z-10" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        {PARTICLES.map((p, i) => (
+          <span key={i} className="particle"
+            style={{ left: p.left, top: p.top, width: p.size, height: p.size, animationDelay: p.delay }} />
+        ))}
+      </div>
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <Reveal>
           <span className="eyebrow"><Sparkles className="h-3.5 w-3.5" /> AI-Driven Technology Company</span>
@@ -54,7 +74,9 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <HeroMockup />
+          <Tilt3D max={9}>
+            <HeroMockup />
+          </Tilt3D>
         </Reveal>
       </div>
     </section>
@@ -287,8 +309,9 @@ export function Products() {
           subtitle="A growing suite of AI-powered platforms for education, creativity and business." />
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p, i) => (
-            <Reveal key={p.name} delay={(i % 3) * 0.08}>
-              <div className="group h-full rounded-3xl glass p-7 transition hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand-600/15 hover:ring-1 hover:ring-brand-400/40">
+            <Reveal key={p.name} delay={(i % 3) * 0.08} className="h-full">
+              <Tilt3D max={5} className="h-full">
+              <div className="group h-full rounded-3xl glass p-7 transition hover:shadow-2xl hover:shadow-brand-600/15 hover:ring-1 hover:ring-brand-400/40">
                 <span className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${p.accent} text-white shadow-lg`}>
                   <p.icon className="h-7 w-7" />
                 </span>
@@ -302,6 +325,7 @@ export function Products() {
                   ))}
                 </ul>
               </div>
+              </Tilt3D>
             </Reveal>
           ))}
         </div>

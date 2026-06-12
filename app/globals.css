@@ -62,6 +62,38 @@ body {
 .conic-glow {
   background: conic-gradient(from 180deg at 50% 50%, #2563eb, #8b5cf6, #06b6d4, #14b8a6, #2563eb);
 }
+
+/* 3D perspective grid floor (futuristic hero base) */
+.grid-floor {
+  position: absolute;
+  left: -30%;
+  right: -30%;
+  bottom: -6%;
+  height: 46%;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(79, 70, 229, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 70, 229, 0.22) 1px, transparent 1px);
+  background-size: 46px 46px;
+  transform: perspective(620px) rotateX(63deg);
+  -webkit-mask-image: linear-gradient(to top, black 25%, transparent 85%);
+  mask-image: linear-gradient(to top, black 25%, transparent 85%);
+  animation: gridmove 2.4s linear infinite;
+}
+html.dark .grid-floor {
+  background-image:
+    linear-gradient(rgba(129, 140, 248, 0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 140, 248, 0.28) 1px, transparent 1px);
+}
+
+/* floating particles */
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.9), rgba(99, 102, 241, 0));
+  animation: float 7s ease-in-out infinite;
+}
 .headline-accent {
   position: relative;
   white-space: nowrap;
