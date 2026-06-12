@@ -12,7 +12,7 @@ import { Reveal, Counter, SectionHeading } from "./ui";
 import {
   HERO_CARDS, TRUST_STATS, PRODUCTS, SOLUTIONS, WHY, TECH, ACHIEVEMENTS,
   CASE_STUDIES, TESTIMONIALS, ROADMAP, CAREERS, CONTACT_EMAIL, OFFICE, TAGLINE,
-  FAQS, VALUE_PROPS,
+  FAQS, VALUE_PROPS, IMG, TEAM,
 } from "@/lib/site";
 
 /* shared decorative blobs */
@@ -228,12 +228,10 @@ export function About() {
   return (
     <section id="about" className="relative py-24">
       <div className="container-x grid items-center gap-12 lg:grid-cols-2">
-        <SectionHeading center={false}
-          eyebrow="About Us"
-          title="Transforming Ideas Into Intelligent Digital Solutions"
-        />
-        <Reveal delay={0.1}>
-          <p className="text-lg text-slate-600 dark:text-slate-400">
+        <Reveal>
+          <span className="eyebrow">About Us</span>
+          <h2 className="h-section mt-4">Transforming Ideas Into Intelligent Digital Solutions</h2>
+          <p className="mt-6 text-lg text-slate-600 dark:text-slate-400">
             Mimanasa Innovations develops scalable technology products that solve real-world challenges
             in education, administration, operations and decision-making.
           </p>
@@ -249,6 +247,26 @@ export function About() {
                 <p className="text-xs text-slate-500">{b}</p>
               </div>
             ))}
+          </div>
+        </Reveal>
+
+        {/* Photo collage */}
+        <Reveal delay={0.12}>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-xl ring-1 ring-black/5">
+              <img src={IMG.about} alt="The Mimanasa team collaborating on product design" loading="lazy"
+                className="h-full w-full object-cover transition duration-500 hover:scale-105" />
+            </div>
+            <div className="mt-8 space-y-4">
+              <div className="relative aspect-square overflow-hidden rounded-3xl shadow-xl ring-1 ring-black/5">
+                <img src={IMG.education} alt="Technology-enabled classroom" loading="lazy"
+                  className="h-full w-full object-cover transition duration-500 hover:scale-105" />
+              </div>
+              <div className="glass rounded-3xl p-5">
+                <p className="text-2xl font-extrabold gradient-text">Since 2025</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Building products that organizations rely on every day.</p>
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>
@@ -407,8 +425,11 @@ export function CaseStudies() {
           {CASE_STUDIES.map((c, i) => (
             <Reveal key={c.title} delay={i * 0.08}>
               <div className="group h-full overflow-hidden rounded-3xl glass">
-                <div className={`h-32 bg-gradient-to-br ${c.color} p-6`}>
-                  <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white backdrop-blur">{c.tag}</span>
+                <div className="relative h-44 overflow-hidden">
+                  <img src={c.img} alt={c.title} loading="lazy"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${c.color} opacity-50`} />
+                  <span className="absolute left-5 top-5 rounded-full bg-white/25 px-3 py-1 text-xs font-bold text-white backdrop-blur">{c.tag}</span>
                 </div>
                 <div className="p-7">
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white">{c.title}</h3>
@@ -494,6 +515,39 @@ export function Roadmap() {
   );
 }
 
+/* ============================== TEAM ============================== */
+export function Team() {
+  return (
+    <section id="team" className="py-24">
+      <div className="container-x">
+        <SectionHeading eyebrow="Leadership"
+          title="The minds behind Mimanasa"
+          subtitle="A small, focused team building products with outsized impact." />
+        <div className="mx-auto mt-14 grid max-w-4xl gap-6 sm:grid-cols-3">
+          {TEAM.map((m, i) => (
+            <Reveal key={m.name} delay={i * 0.08}>
+              <a href={m.linkedin} target="_blank" rel="noreferrer"
+                className="group block h-full rounded-3xl glass p-7 text-center transition hover:-translate-y-1.5">
+                <span className={`mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${m.color} text-2xl font-extrabold text-white shadow-lg`}>
+                  {m.name.split(" ").map((w) => w[0]).join("")}
+                </span>
+                <h3 className="mt-5 font-bold text-slate-900 dark:text-white">{m.name}</h3>
+                <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">{m.role}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3.5 py-1.5 text-xs font-semibold text-slate-500 transition group-hover:border-brand-400 group-hover:text-brand-600 dark:border-white/15 dark:text-slate-400">
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                  </svg>
+                  LinkedIn
+                </span>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ============================== CAREERS ============================== */
 export function Careers() {
   return (
@@ -508,6 +562,11 @@ export function Careers() {
               <a href="#contact" className="btn-primary mt-7">See open roles <ArrowRight className="h-4 w-4" /></a>
             </Reveal>
             <Reveal delay={0.1}>
+              <div className="relative mb-5 aspect-[16/8] overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5">
+                <img src={IMG.team} alt="Mimanasa team working together" loading="lazy"
+                  className="h-full w-full object-cover transition duration-500 hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/50 to-transparent" />
+              </div>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {CAREERS.map((c) => (
                   <div key={c.title} className="glass-soft flex flex-col items-center gap-2 rounded-2xl p-5 text-center">
