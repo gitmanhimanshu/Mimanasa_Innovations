@@ -59,6 +59,25 @@ body {
 .glow {
   box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.15), 0 20px 60px -20px rgba(37, 99, 235, 0.45);
 }
+.conic-glow {
+  background: conic-gradient(from 180deg at 50% 50%, #2563eb, #8b5cf6, #06b6d4, #14b8a6, #2563eb);
+}
+.headline-accent {
+  position: relative;
+  white-space: nowrap;
+}
+.headline-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.04em;
+  height: 0.16em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #8b5cf6, #06b6d4);
+  opacity: 0.35;
+  z-index: -1;
+}
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

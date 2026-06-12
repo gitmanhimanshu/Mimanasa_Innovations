@@ -36,7 +36,7 @@ export function Hero() {
         <Reveal>
           <span className="eyebrow"><Sparkles className="h-3.5 w-3.5" /> AI-Driven Technology Company</span>
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
-            Building <span className="gradient-text">Intelligent Products</span> For The Future
+            Building <span className="gradient-text headline-accent">Intelligent Products</span><br className="hidden sm:block" /> For The Future
           </h1>
           <p className="mt-6 max-w-xl text-lg text-slate-600 dark:text-slate-400">
             We create AI-powered software, education platforms, business automation systems and
@@ -64,6 +64,8 @@ export function Hero() {
 function HeroMockup() {
   return (
     <div className="relative mx-auto w-full max-w-lg">
+      {/* animated conic glow behind the dashboard */}
+      <div className="conic-glow absolute -inset-5 -z-10 rounded-[2.5rem] opacity-25 blur-2xl dark:opacity-35" />
       <div className="glass glow rounded-3xl p-5">
         <div className="flex items-center gap-1.5 pb-4">
           <span className="h-3 w-3 rounded-full bg-rose-400" />
@@ -286,7 +288,7 @@ export function Products() {
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p, i) => (
             <Reveal key={p.name} delay={(i % 3) * 0.08}>
-              <div className="group h-full rounded-3xl glass p-7 transition hover:-translate-y-1.5">
+              <div className="group h-full rounded-3xl glass p-7 transition hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand-600/15 hover:ring-1 hover:ring-brand-400/40">
                 <span className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${p.accent} text-white shadow-lg`}>
                   <p.icon className="h-7 w-7" />
                 </span>
@@ -516,6 +518,28 @@ export function Roadmap() {
 }
 
 /* ============================== TEAM ============================== */
+function Headshot({ member }) {
+  const [broken, setBroken] = useState(false);
+  const initials = member.name.split(" ").map((w) => w[0]).join("");
+  return (
+    <span className={`mx-auto block h-24 w-24 rounded-full bg-gradient-to-br ${member.color} p-[3px] shadow-lg transition group-hover:scale-105`}>
+      {member.img && !broken ? (
+        <img
+          src={member.img}
+          alt={member.name}
+          loading="lazy"
+          onError={() => setBroken(true)}
+          className="h-full w-full rounded-full object-cover ring-2 ring-white dark:ring-navy-800"
+        />
+      ) : (
+        <span className="flex h-full w-full items-center justify-center rounded-full bg-white text-2xl font-extrabold gradient-text dark:bg-navy-800">
+          {initials}
+        </span>
+      )}
+    </span>
+  );
+}
+
 export function Team() {
   return (
     <section id="team" className="py-24">
@@ -528,9 +552,7 @@ export function Team() {
             <Reveal key={m.name} delay={i * 0.08}>
               <a href={m.linkedin} target="_blank" rel="noreferrer"
                 className="group block h-full rounded-3xl glass p-7 text-center transition hover:-translate-y-1.5">
-                <span className={`mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${m.color} text-2xl font-extrabold text-white shadow-lg`}>
-                  {m.name.split(" ").map((w) => w[0]).join("")}
-                </span>
+                <Headshot member={m} />
                 <h3 className="mt-5 font-bold text-slate-900 dark:text-white">{m.name}</h3>
                 <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">{m.role}</p>
                 <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3.5 py-1.5 text-xs font-semibold text-slate-500 transition group-hover:border-brand-400 group-hover:text-brand-600 dark:border-white/15 dark:text-slate-400">
