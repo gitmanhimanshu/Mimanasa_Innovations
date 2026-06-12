@@ -661,6 +661,36 @@ export function Contact() {
   );
 }
 
+/* ============================== CTA BANNER ============================== */
+export function CtaBanner() {
+  return (
+    <section className="pb-24">
+      <div className="container-x">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-700 via-brand-600 to-violet-700 px-8 py-14 text-center text-white sm:px-14">
+            <div className="conic-glow absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-30 blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-cyan-400/30 blur-3xl" />
+            <h2 className="relative text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Innovating Today. Empowering Tomorrow.
+            </h2>
+            <p className="relative mx-auto mt-4 max-w-2xl text-lg text-brand-100">
+              Ready to see what intelligent software can do for your organization? Let's talk.
+            </p>
+            <div className="relative mt-8 flex flex-wrap justify-center gap-3">
+              <a href="#contact" className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-brand-700 shadow-xl transition hover:scale-105">
+                Book a Demo <ArrowRight className="h-4 w-4" />
+              </a>
+              <a href="#products" className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20">
+                Explore Products
+              </a>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function Field({ label, name, type = "text", required }) {
   return (
     <div>
